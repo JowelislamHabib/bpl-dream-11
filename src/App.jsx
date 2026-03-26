@@ -5,7 +5,7 @@ import Nav from "./Components/Nav/Nav";
 import Players from "./Components/Players/Players";
 
 const fetchPlayers = async () => {
-  const res = await fetch("/players.json");
+  const res = await fetch("/PlayersData.json");
   return res.json();
 };
 
