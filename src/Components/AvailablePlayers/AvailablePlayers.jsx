@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { User } from "lucide-react";
 import { AF, AU, PK, GB, NZ, BD, ZA, ZW } from "country-flag-icons/react/3x2";
 
@@ -23,7 +23,7 @@ const AvailablePlayers = ({ playersData }) => {
     ),
     Zimbabwe: <ZW className="w-6 h-4 shadow-sm rounded-xs" title="Zimbabwe" />,
   };
-
+  const [selectedPlayers, setSelectedPlayers] = useState([]);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       {playersData.map((player, index) => (
@@ -89,8 +89,19 @@ const AvailablePlayers = ({ playersData }) => {
                   ${player.price.toLocaleString()}
                 </span>
               </div>
-              <button className="btn btn-outline h-10 min-h-10 px-4 rounded-lg border-gray-300 normal-case font-semibold hover:bg-gray-100 hover:text-gray-900 hover:border-gray-400">
-                Choose Player
+              <button
+                onClick={() => {
+                  setSelectedPlayers([...selectedPlayers, player.playerName]);
+                }}
+                className={`btn ${
+                  selectedPlayers.includes(player.playerName)
+                    ? "btn-disabled"
+                    : "btn-outline"
+                } h-10 min-h-10 px-4 rounded-lg border-gray-300 normal-case font-semibold hover:bg-gray-100 hover:text-gray-900 hover:border-gray-400`}
+              >
+                {selectedPlayers.includes(player.playerName)
+                  ? "Selected"
+                  : "Choose Player"}
               </button>
             </div>
           </div>
