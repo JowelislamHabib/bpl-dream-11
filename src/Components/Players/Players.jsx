@@ -1,6 +1,7 @@
 import React, { use } from "react";
 import AvailablePlayers from "../AvailablePlayers/AvailablePlayers";
 import { useState } from "react";
+import SelectedPlayers from "../SelectedPlayers/SelectedPlayers";
 
 const Players = ({ playersPromise }) => {
   const playersData = use(playersPromise);
@@ -32,7 +33,11 @@ const Players = ({ playersPromise }) => {
             </button>
           </div>
         </div>
-        <AvailablePlayers playersData={playersData} />
+        {selectedType === "available" ? (
+          <AvailablePlayers playersData={playersData} />
+        ) : (
+          <SelectedPlayers />
+        )}
       </div>
     </>
   );
