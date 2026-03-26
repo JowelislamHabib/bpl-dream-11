@@ -21,7 +21,7 @@ function App() {
           <span className="loading loading-spinner text-success"></span>
         }
       >
-        <Players playersPromise={playersPromise}></Players>
+        <Players playersPromise={playersPromise} />
       </Suspense>
     </>
   );
