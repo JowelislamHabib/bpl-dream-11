@@ -26,12 +26,12 @@ const AvailablePlayers = ({ playersData }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {playersData?.map((player, index) => (
+      {playersData.map((player, index) => (
         <div
           key={index}
-          className="card bg-base-100 w-full max-w-sm border border-gray-200 shadow-sm rounded-3xl p-6"
+          className="card bg-base-100  border border-gray-200 shadow-sm rounded-3xl p-6"
         >
-          <figure className="w-full h-64 bg-gray-100 rounded-2xl overflow-hidden mb-5">
+          <figure className="hover-3d w-full h-64 bg-gray-100 rounded-2xl overflow-hidden mb-5">
             <img
               src={player.playerImage}
               alt={player.playerName}
@@ -83,8 +83,8 @@ const AvailablePlayers = ({ playersData }) => {
             </div>
 
             <div className="flex justify-between items-center pt-1">
-              <div className="flex flex-col">
-                <span className="font-bold text-gray-800 text-sm">Price</span>
+              <div className="flex flex-row">
+                <span className="font-bold text-gray-800 text-sm">Price: </span>
                 <span className="font-bold text-gray-800 text-sm">
                   ${player.price.toLocaleString()}
                 </span>
