@@ -1,8 +1,9 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import "./App.css";
 import Banner from "./Components/Banner/Banner";
 import Nav from "./Components/Nav/Nav";
 import Players from "./Components/Players/Players";
+import { ToastContainer } from "react-toastify";
 
 const fetchPlayers = async () => {
   const res = await fetch("/PlayersData.json");
@@ -11,9 +12,11 @@ const fetchPlayers = async () => {
 
 function App() {
   const playersPromise = fetchPlayers();
+  const [coin, setCoin] = useState(5000000000);
+
   return (
     <>
-      <Nav />
+      <Nav coin={coin} />
       <Banner></Banner>
 
       <Suspense
@@ -21,8 +24,13 @@ function App() {
           <span className="loading loading-spinner text-success"></span>
         }
       >
-        <Players playersPromise={playersPromise} />
+        <Players
+          playersPromise={playersPromise}
+          setCoin={setCoin}
+          coin={coin}
+        />
       </Suspense>
+      <ToastContainer />
     </>
   );
 }

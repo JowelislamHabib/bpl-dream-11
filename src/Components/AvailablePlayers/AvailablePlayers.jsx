@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { User } from "lucide-react";
 import { AF, AU, PK, GB, NZ, BD, ZA, ZW } from "country-flag-icons/react/3x2";
+import { ToastContainer } from "react-toastify";
 
-const AvailablePlayers = ({ playersData }) => {
+const AvailablePlayers = ({ playersData, setCoin, coin }) => {
   const flags = {
     Afghanistan: (
       <AF className="w-6 h-4 shadow-sm rounded-xs" title="Afghanistan" />
@@ -24,6 +25,18 @@ const AvailablePlayers = ({ playersData }) => {
     Zimbabwe: <ZW className="w-6 h-4 shadow-sm rounded-xs" title="Zimbabwe" />,
   };
   const [selectedPlayers, setSelectedPlayers] = useState([]);
+
+  const handleChoosePlayer = (player) => {
+    alert(`${player.playerName} is Selected`);
+    if (selectedPlayers.includes(player.playerName)) return;
+    if (coin < player.price) {
+      alert("Not enough coins!");
+      return;
+    }
+    setSelectedPlayers([...selectedPlayers, player.playerName]);
+    setCoin(coin - player.price);
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       {playersData.map((player, index) => (
@@ -90,9 +103,8 @@ const AvailablePlayers = ({ playersData }) => {
                 </span>
               </div>
               <button
-                onClick={() => {
-                  setSelectedPlayers([...selectedPlayers, player.playerName]);
-                }}
+                onClick={() => handleChoosePlayer(player)}
+                disabled={selectedPlayers.includes(player.playerName)}
                 className={`btn ${
                   selectedPlayers.includes(player.playerName)
                     ? "btn-disabled"

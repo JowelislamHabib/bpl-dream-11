@@ -3,10 +3,9 @@ import AvailablePlayers from "../AvailablePlayers/AvailablePlayers";
 import { useState } from "react";
 import SelectedPlayers from "../SelectedPlayers/SelectedPlayers";
 
-const Players = ({ playersPromise }) => {
+const Players = ({ playersPromise, setCoin, coin }) => {
   const playersData = use(playersPromise);
   const [selectedType, setSelectedType] = useState("available");
-  console.log(selectedType);
   return (
     <>
       <div className="container mx-auto">
@@ -34,7 +33,11 @@ const Players = ({ playersPromise }) => {
           </div>
         </div>
         {selectedType === "available" ? (
-          <AvailablePlayers playersData={playersData} />
+          <AvailablePlayers
+            playersData={playersData}
+            setCoin={setCoin}
+            coin={coin}
+          />
         ) : (
           <SelectedPlayers />
         )}
